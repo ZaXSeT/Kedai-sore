@@ -1,0 +1,165 @@
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/figtree';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/ibm-plex-mono/600.css';
+
+:root {
+	--milk: #fbf8f1;
+	--paper: #ffffff;
+	--butter: #f2ead8;
+	--leaf: #2e6b3c;
+	--leaf-deep: #1f4d2a;
+	--leaf-tint: #e5efe3;
+	--ink: #1f2420;
+	--soft: #59605a;
+	--line: #e0d9cb;
+	--alert: #a4372a;
+	--focus: #1d5fbf;
+
+	--display: 'Bricolage Grotesque Variable', 'Trebuchet MS', sans-serif;
+	--body: 'Figtree Variable', system-ui, sans-serif;
+	--mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+	--gutter: clamp(1rem, 4vw, 2rem);
+	--max: 72rem;
+	color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--milk);
+	color: var(--ink);
+	font-family: var(--body);
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--display);
+	margin: 0;
+	line-height: 1.1;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+button {
+	font: inherit;
+}
+
+:focus-visible {
+	outline: 3px solid var(--focus);
+	outline-offset: 2px;
+}
+
+.wrap {
+	width: 100%;
+	max-width: var(--max);
+	margin-inline: auto;
+	padding-inline: var(--gutter);
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	min-height: 3rem;
+	padding: 0.6rem 1.25rem;
+	border: 0;
+	border-radius: 999px;
+	background: var(--leaf);
+	color: #fff;
+	font-family: var(--display);
+	font-size: 1.1rem;
+	font-weight: 650;
+	text-decoration: none;
+	cursor: pointer;
+}
+.btn:hover {
+	background: var(--leaf-deep);
+}
+.btn[disabled] {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+.btn.quiet {
+	background: transparent;
+	color: var(--leaf-deep);
+	box-shadow: inset 0 0 0 2px var(--leaf);
+}
+.btn.quiet:hover {
+	background: var(--leaf-tint);
+}
+
+/* Kontrol jumlah, dipakai di menu, ringkasan, dan checkout */
+.stepper {
+	display: inline-flex;
+	align-items: center;
+	border: 1.5px solid var(--leaf);
+	border-radius: 999px;
+	background: var(--paper);
+}
+.stepper button {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 0;
+	background: none;
+	color: var(--leaf-deep);
+	font-size: 1.35rem;
+	font-weight: 700;
+	line-height: 1;
+	border-radius: 999px;
+	cursor: pointer;
+}
+.stepper button:hover:not([disabled]) {
+	background: var(--leaf-tint);
+}
+.stepper button[disabled] {
+	color: #b5b9b2;
+	cursor: not-allowed;
+}
+.stepper output {
+	min-width: 1.6rem;
+	text-align: center;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+}
+
+.visually-hidden {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

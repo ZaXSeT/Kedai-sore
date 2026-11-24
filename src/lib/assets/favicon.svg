@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+	<title>Kedai Sore</title>
+	<rect width="64" height="64" rx="16" fill="#2e6b3c"/>
+	<path d="M19 22h26l-3 30a4 4 0 0 1-4 3.6H26a4 4 0 0 1-4-3.6z" fill="#fbf8f1"/>
+	<path d="M20.6 36h22.8l-1.5 16a4 4 0 0 1-4 3.6H26a4 4 0 0 1-4-3.6z" fill="#c9a06b"/>
+	<rect x="17" y="17" width="30" height="6" rx="3" fill="#fbf8f1"/>
+	<path d="M36 17 40 6" stroke="#fbf8f1" stroke-width="3.5" stroke-linecap="round"/>
+</svg>
