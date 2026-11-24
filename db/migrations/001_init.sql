@@ -1,7 +1,14 @@
 -- Kedai Sore · skema awal
 -- Schema privat "kedai": tidak diekspos Data API Supabase, hanya diakses fungsi server.
 
-create schema if not exists kedai;
+-- Di Supabase, schema sudah dibuat dan dimiliki role aplikasi; buat hanya bila belum ada.
+do $$
+begin
+	if not exists (select 1 from pg_namespace where nspname = 'kedai') then
+		create schema kedai;
+	end if;
+end
+$$;
 
 create table kedai.products (
 	id text primary key check (id ~ '^[a-z0-9-]{1,40}$'),

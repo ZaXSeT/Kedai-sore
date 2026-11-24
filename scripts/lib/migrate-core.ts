@@ -11,7 +11,10 @@ export async function migrate(sql: Sql, log: (m: string) => void = console.log):
 		// Kunci advisory mencegah dua proses migrasi berjalan bersamaan.
 		await tx`select pg_advisory_xact_lock(4021002)`;
 		// Catatan migrasi ikut di schema privat agar tidak terekspos Data API Supabase.
-		await tx`create schema if not exists kedai`;
+		// Cek dulu: `create schema if not exists` tetap butuh izin CREATE pada database,
+		// sedangkan role aplikasi di Supabase hanya memiliki schema-nya sendiri.
+		const [{ ada }] = await tx<{ ada: boolean }[]>`select exists (select 1 from pg_namespace where nspname = ${'kedai'}) as ada`;
+		if (!ada) await tx`create schema kedai`;
 		await tx`create table if not exists kedai.schema_migrations (
 			name text primary key,
 			applied_at timestamptz not null default now()
