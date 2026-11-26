@@ -22,10 +22,18 @@
 	description="Pilih kopi, nonkopi, dan camilan Kedai Sore, kirim pesanan, lalu tunjukkan kode ambil di kasir. Proyek konsep dengan data contoh."
 />
 
-<div class="wrap intro">
-	<h1>Menu sore ini</h1>
-	<p>Pesan dari HP, lalu ambil dan bayar di kasir. {SHOP.hours}.</p>
-</div>
+<section class="band" aria-labelledby="judul">
+	<div class="band-text">
+		<h1 id="judul">Menu<br />sore ini</h1>
+		<p class="lede">Pesan dari HP, lalu ambil dan bayar di kasir.</p>
+		<p class="where">{SHOP.pickup} · {SHOP.hours}</p>
+	</div>
+	<div class="band-pics" aria-hidden="true">
+		{#each ['es-kopi-sore', 'roti-gula-aren', 'matcha-susu'] as img, i (img)}
+			<img src={`/menu/${img}.webp`} width="480" height="480" alt="" class={`pic pic-${i}`} fetchpriority={i === 0 ? 'high' : undefined} />
+		{/each}
+	</div>
+</section>
 
 <nav class="cats" aria-label="Kategori menu">
 	<div class="wrap cats-row">
@@ -120,23 +128,56 @@
 {/if}
 
 <style>
-	.intro {
-		padding-block: 1.75rem 1rem;
+	/* Pita pembuka hijau selebar layar */
+	.band {
+		display: grid;
+		gap: 1.5rem;
+		background: var(--leaf);
+		color: #fff;
+		padding: clamp(1.75rem, 5vw, 3.5rem) var(--gutter) clamp(1.5rem, 4vw, 3rem);
+		overflow: hidden;
 	}
 	h1 {
-		font-size: clamp(2.4rem, 9vw, 3.6rem);
+		font-size: clamp(3.4rem, 15vw, 9rem);
 		font-weight: 800;
-		letter-spacing: -0.02em;
-		color: var(--leaf-deep);
+		letter-spacing: -0.035em;
+		line-height: 0.88;
 	}
-	.intro p {
+	.lede {
+		margin-top: 1rem;
+		font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+		font-weight: 600;
+		max-width: 30ch;
+	}
+	.where {
 		margin-top: 0.4rem;
-		color: var(--soft);
-		max-width: 46ch;
+		color: var(--gold-soft);
+		font-size: 0.95rem;
+		max-width: 52ch;
+	}
+	.band-pics {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+	.pic {
+		width: clamp(6.5rem, 28vw, 15rem);
+		height: auto;
+		aspect-ratio: 1;
+		object-fit: cover;
+		border-radius: 50%;
+		border: clamp(4px, 0.6vw, 8px) solid var(--leaf);
+		box-shadow: 0 0 0 2px var(--gold);
+	}
+	.pic + .pic {
+		margin-left: clamp(-3rem, -6vw, -1.5rem);
+	}
+	.pic-1 {
+		transform: translateY(12%);
 	}
 	.cats {
 		position: sticky;
-		top: 0;
+		top: var(--header-h);
 		z-index: 10;
 		background: color-mix(in srgb, var(--milk) 92%, transparent);
 		backdrop-filter: blur(6px);
@@ -177,7 +218,7 @@
 		font-size: 1.6rem;
 		font-weight: 750;
 		padding-bottom: 0.5rem;
-		border-bottom: 2px solid var(--ink);
+		border-bottom: 2px solid var(--gold);
 	}
 	section ul {
 		list-style: none;
@@ -330,7 +371,7 @@
 		color: #fff;
 		font-weight: 700;
 		text-decoration: none;
-		box-shadow: 0 6px 18px rgb(31 77 42 / 0.28);
+		box-shadow: inset 0 0 0 1px var(--gold), 0 6px 18px rgb(19 40 29 / 0.3);
 	}
 	.mobile-bar strong {
 		font-family: var(--display);
@@ -349,8 +390,12 @@
 		}
 	}
 	@media (min-width: 62rem) {
+		.band {
+			grid-template-columns: minmax(0, 1fr) auto;
+			align-items: end;
+		}
 		.layout {
-			grid-template-columns: minmax(0, 1fr) 21rem;
+			grid-template-columns: minmax(0, 1fr) 22rem;
 			gap: 3rem;
 			align-items: start;
 		}
@@ -360,7 +405,7 @@
 		.summary {
 			display: block;
 			position: sticky;
-			top: 4.5rem;
+			top: calc(var(--header-h) + 4.5rem);
 			margin-top: 1rem;
 			background: var(--paper);
 			border: 1px solid var(--line);
@@ -371,4 +416,17 @@
 			display: none;
 		}
 	}
+	/* Layar lebar: menu dua kolom seperti menu cetak */
+	@media (min-width: 100rem) {
+		section ul {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			column-gap: 3rem;
+		}
+		.layout {
+			grid-template-columns: minmax(0, 1fr) 24rem;
+			gap: 4rem;
+		}
+	}
+
 </style>

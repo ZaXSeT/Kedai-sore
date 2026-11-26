@@ -4,7 +4,7 @@ Demo portofolio untuk pemilik usaha kuliner yang melayani pickup. Pelanggan memi
 
 Semua nama, alamat, dan pesanan di proyek ini fiktif.
 
-**Status:** selesai dan teruji lokal (24 Nov 2026). Belum di-deploy. Langkahnya ada di bagian [Deploy ke Vercel](#deploy-ke-vercel).
+**Status:** live di Production → **https://kedai-sore.vercel.app** (diverifikasi 26 Nov 2026). Repo: [github.com/ZaXSeT/Kedai-sore](https://github.com/ZaXSeT/Kedai-sore).
 
 ![Struk dengan kode ambil di HP, lebar 390 px](docs/hp-struk.png)
 
@@ -107,7 +107,32 @@ T93N  Sinta  ·  19.49 WIB  ·  3 item
 | Restart | Postgres dihentikan dan dinyalakan ulang | 6 pesanan tetap terbaca |
 | Layout | 390 px dan 1440 px | Tanpa scroll horizontal; bilah HP tidak menutupi baris terakhir; desktop menampilkan ringkasan di samping menu |
 
-Environment: Windows 11, Node 24.11.1, Postgres tertanam lokal. Vercel Preview dan Production belum diuji.
+Environment: Windows 11, Node 24.11.1, Postgres tertanam lokal. Vercel Preview dan Production: lihat bagian Deployment yang berjalan.
+
+## Deployment yang berjalan
+
+| | Nilai |
+|---|---|
+| URL Production | https://kedai-sore.vercel.app |
+| Repo GitHub | [ZaXSeT/Kedai-sore](https://github.com/ZaXSeT/Kedai-sore) (folder ini adalah root repo; push ke `main` = deploy Production) |
+| Proyek Vercel | `kedai-sore` (Hobby, framework SvelteKit, region fungsi `sin1`) |
+| Database Production | Supabase `porto-threads-prod` (Singapura), schema `kedai`, role `kedai_app` |
+| Database Preview | Supabase `porto-threads-preview`, schema dan role yang sama |
+| Env | `DATABASE_URL` (Sensitive) berbeda untuk Production dan Preview, lewat transaction pooler `aws-1-ap-southeast-1.pooler.supabase.com:6543` |
+
+Role `kedai_app` hanya memiliki schema `kedai`. Akses ke schema aplikasi lain dan `CREATE` pada database ditolak (diuji). Preview deployment dilindungi Vercel Authentication; Production publik.
+
+### Hasil uji di Vercel (26 Nov 2026)
+
+| Lingkungan | Hasil |
+|---|---|
+| Preview | K1 2 Es Kopi Sore + 1 Roti Gula Aren = Rp68.000; K3 dua kiriman kembar → kode sama (HCDX), kunci lama isi beda → 409; K2 item habis → 409; K4 keranjang kosong → 400; `pesanan` di DB preview 1, DB prod 0 |
+| Production | K1 Rp68.000 dengan kiriman kembar → satu kode (GTUD); K2/K3/K4 sama seperti Preview |
+| Redeploy Production | Transaksi sintetis sebelum redeploy tetap terbaca lewat CLI pemilik setelah redeploy (lihat `npm run pesanan` dengan `DATABASE_URL` Production) |
+
+## Desain
+
+Navbar penuh dari tepi ke tepi dan menempel di atas; konten dan foto mengisi lebar layar dengan gutter `clamp(1rem, 3.2vw, 3rem)`. Palet: hijau botol `#1f3d2e`, krim `#f7f2e7`, emas sampanye `#c4a46a`, cokelat espresso `#2a211b`. Dicek di 360, 390, 768, 1440, dan 1920 px tanpa scroll horizontal.
 
 ## Deploy ke Vercel
 

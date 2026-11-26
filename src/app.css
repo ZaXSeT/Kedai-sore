@@ -4,24 +4,29 @@
 @import '@fontsource/ibm-plex-mono/600.css';
 
 :root {
-	--milk: #fbf8f1;
-	--paper: #ffffff;
-	--butter: #f2ead8;
-	--leaf: #2e6b3c;
-	--leaf-deep: #1f4d2a;
-	--leaf-tint: #e5efe3;
-	--ink: #1f2420;
-	--soft: #59605a;
-	--line: #e0d9cb;
-	--alert: #a4372a;
+	/* Palet mewah: hijau botol, krim, emas sampanye, cokelat espresso. */
+	--milk: #f7f2e7;
+	--paper: #fffdf8;
+	--butter: #eee3cb;
+	--leaf: #1f3d2e;
+	--leaf-deep: #13281d;
+	--leaf-tint: #e3e9df;
+	--gold: #c4a46a;
+	--gold-soft: #e2cfa4;
+	--ink: #2a211b;
+	--soft: #5f554b;
+	--line: #ddd2bd;
+	--alert: #9b3326;
 	--focus: #1d5fbf;
 
 	--display: 'Bricolage Grotesque Variable', 'Trebuchet MS', sans-serif;
 	--body: 'Figtree Variable', system-ui, sans-serif;
 	--mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-	--gutter: clamp(1rem, 4vw, 2rem);
-	--max: 72rem;
+	/* Konten mengisi lebar layar; hanya gutter yang menjaga jarak dari tepi. */
+	--gutter: clamp(1rem, 3.2vw, 3rem);
+	--max: none;
+	--header-h: 3.75rem;
 	color-scheme: light;
 }
 
